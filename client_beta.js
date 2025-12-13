@@ -557,7 +557,23 @@ const {
     getPoint,
     setPoint,
     // CHRISTMAS EVENT
+    addToken,
+    MinToken,
+    getToken,
+    setToken,
 
+    addFrag,
+    MinFrag,
+    getFrag,
+    setFrag,
+
+    getUserItemSpy,
+
+    getChristmasLeaderboard,
+    getChristmasShopInventory,
+    buyChristmasShopItem,
+    generateChristmasReward,
+    addChristmasSpentToken,
     //WARN
     addWarn,
     getWarn,
