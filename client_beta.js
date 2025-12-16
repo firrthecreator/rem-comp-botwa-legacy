@@ -15350,90 +15350,90 @@ Selamat bersenang-senang mencari semua Gift Box yang tersembunyi dan Selamat Nat
                     return reply(from, 'Terjadi kesalahan saat mengambil leaderboard :(', id)
                 }
                 break
-            case prefix+'christmasshop':
-            case prefix+'xmashop':
-            case prefix+'xshop':
-                // return reply(from, 'Maaf! Fitur ini hanya tersedia untuk Event Natal saja!', id)
-                if (!isOwner) return reply(from, 'Err: 403!')
+            // case prefix+'christmasshop':
+            // case prefix+'xmashop':
+            // case prefix+'xshop':
+            //     // return reply(from, 'Maaf! Fitur ini hanya tersedia untuk Event Natal saja!', id)
+            //     if (!isOwner) return reply(from, 'Err: 403!')
                 
-                try {
-                    const shop = await getChristmasShopInventory()
+            //     try {
+            //         const shop = await getChristmasShopInventory()
                     
-                    if(args.length === 1) {
-                        // menu shop
-                        let shopDisplay = `🛍️ *CHRISTMAS DAILY SHOP* 🛍️\n\n`
-                        let itemNum = 1
-                        for (const [key, item] of Object.entries(shop.items)) {
-                            shopDisplay += `${itemNum}. *${item.name}*\n   Harga: ${numberWithCommas(item.price)} Token\n   Stok: ${item.qty}\n\n`
-                            itemNum++
-                        }
-                        shopDisplay += `\nKetik *${prefix}xshop [nomor] [jumlah]* untuk membeli\n`
-                        shopDisplay += `Contoh: *${prefix}xshop 1 2* (membeli item 1 sebanyak 2)\n\n`
-                        shopDisplay += `⏱️ Shop akan tereset dalam 24 jam!\n────────────────\n*© RemComp 2025*`
-                        return reply(from, shopDisplay, id)
-                    } else if(args.length >= 2) {
-                        const itemIndex = parseInt(args[1]) - 1
-                        const quantity = args[2] ? parseInt(args[2]) : 1
+            //         if(args.length === 1) {
+            //             // menu shop
+            //             let shopDisplay = `🛍️ *CHRISTMAS DAILY SHOP* 🛍️\n\n`
+            //             let itemNum = 1
+            //             for (const [key, item] of Object.entries(shop.items)) {
+            //                 shopDisplay += `${itemNum}. *${item.name}*\n   Harga: ${numberWithCommas(item.price)} Token\n   Stok: ${item.qty}\n\n`
+            //                 itemNum++
+            //             }
+            //             shopDisplay += `\nKetik *${prefix}xshop [nomor] [jumlah]* untuk membeli\n`
+            //             shopDisplay += `Contoh: *${prefix}xshop 1 2* (membeli item 1 sebanyak 2)\n\n`
+            //             shopDisplay += `⏱️ Shop akan tereset dalam 24 jam!\n────────────────\n*© RemComp 2025*`
+            //             return reply(from, shopDisplay, id)
+            //         } else if(args.length >= 2) {
+            //             const itemIndex = parseInt(args[1]) - 1
+            //             const quantity = args[2] ? parseInt(args[2]) : 1
                         
-                        const itemKeys = Object.keys(shop.items)
-                        if(itemIndex < 0 || itemIndex >= itemKeys.length) {
-                            return reply(from, `❌ Nomor item tidak valid! Gunakan *${prefix}xshop* untuk melihat daftar item.`, id)
-                        }
+            //             const itemKeys = Object.keys(shop.items)
+            //             if(itemIndex < 0 || itemIndex >= itemKeys.length) {
+            //                 return reply(from, `❌ Nomor item tidak valid! Gunakan *${prefix}xshop* untuk melihat daftar item.`, id)
+            //             }
                         
-                        const itemId = itemKeys[itemIndex]
-                        const item = shop.items[itemId]
-                        const totalPrice = item.price * quantity
+            //             const itemId = itemKeys[itemIndex]
+            //             const item = shop.items[itemId]
+            //             const totalPrice = item.price * quantity
                         
-                        if(itemId.includes('nametag')) {
-                            const currentNameTagList = getNameTagList(_userDb) || []
-                            const shopNameTag = item.name.replace('✨ Custom NameTag: ', '')
+            //             if(itemId.includes('nametag')) {
+            //                 const currentNameTagList = getNameTagList(_userDb) || []
+            //                 const shopNameTag = item.name.replace('✨ Custom NameTag: ', '')
                             
-                            if(currentNameTagList.includes(shopNameTag)) {
-                                return reply(from, `❌ Kamu sudah memiliki NameTag "*${shopNameTag}*"!\nTidak bisa membeli NameTag yang sama dua kali.`, id)
-                            }
-                        }
+            //                 if(currentNameTagList.includes(shopNameTag)) {
+            //                     return reply(from, `❌ Kamu sudah memiliki NameTag "*${shopNameTag}*"!\nTidak bisa membeli NameTag yang sama dua kali.`, id)
+            //                 }
+            //             }
                         
-                        const userToken = getToken(_userDb)
-                        if(userToken < totalPrice) {
-                            const shortOf = numberWithCommas(fixNumberE(totalPrice - userToken))
-                            return reply(from, `❌ Token kamu tidak cukup!\nButuh: ${numberWithCommas(fixNumberE(totalPrice))}\nKekurangan: ${shortOf}`, id)
-                        }
+            //             const userToken = getToken(_userDb)
+            //             if(userToken < totalPrice) {
+            //                 const shortOf = numberWithCommas(fixNumberE(totalPrice - userToken))
+            //                 return reply(from, `❌ Token kamu tidak cukup!\nButuh: ${numberWithCommas(fixNumberE(totalPrice))}\nKekurangan: ${shortOf}`, id)
+            //             }
                         
-                        const purchaseResult = await buyChristmasShopItem(itemId, quantity)
-                        if(!purchaseResult.success) {
-                            return reply(from, `❌ ${purchaseResult.message}`, id)
-                        }
+            //             const purchaseResult = await buyChristmasShopItem(itemId, quantity)
+            //             if(!purchaseResult.success) {
+            //                 return reply(from, `❌ ${purchaseResult.message}`, id)
+            //             }
                         
-                        await MinToken(sender, totalPrice)
+            //             await MinToken(sender, totalPrice)
                         
-                        if(itemId.includes('token')) {
-                            const tokenAmount = parseInt(itemId.split('_')[1]) * quantity
-                            await addToken(sender, tokenAmount)
-                        } else if(itemId.includes('frag')) {
-                            const fragAmount = parseInt(itemId.split('_')[1]) * quantity
-                            await addFrag(sender, fragAmount)
-                        } else if(itemId.includes('limit')) {
-                            const limitAmount = parseInt(itemId.split('_')[1]) * quantity
-                            await limitAdd(sender, limitAmount)
-                        } else if(itemId.includes('xp')) {
-                            const xpAmount = parseInt(itemId.split('_')[1]) * quantity
-                            await addLevelingXp(sender, xpAmount)
-                        } else if(itemId.includes('nametag')) {
-                            const shop = await getChristmasShopInventory()
-                            const customNameTag = shop.items.nametag.name.replace('✨ Custom NameTag: ', '')
-                            await addNameTag_tag(sender, customNameTag)
-                        }
+            //             if(itemId.includes('token')) {
+            //                 const tokenAmount = parseInt(itemId.split('_')[1]) * quantity
+            //                 await addToken(sender, tokenAmount)
+            //             } else if(itemId.includes('frag')) {
+            //                 const fragAmount = parseInt(itemId.split('_')[1]) * quantity
+            //                 await addFrag(sender, fragAmount)
+            //             } else if(itemId.includes('limit')) {
+            //                 const limitAmount = parseInt(itemId.split('_')[1]) * quantity
+            //                 await limitAdd(sender, limitAmount)
+            //             } else if(itemId.includes('xp')) {
+            //                 const xpAmount = parseInt(itemId.split('_')[1]) * quantity
+            //                 await addLevelingXp(sender, xpAmount)
+            //             } else if(itemId.includes('nametag')) {
+            //                 const shop = await getChristmasShopInventory()
+            //                 const customNameTag = shop.items.nametag.name.replace('✨ Custom NameTag: ', '')
+            //                 await addNameTag_tag(sender, customNameTag)
+            //             }
                         
-                        await addChristmasSpentToken(sender, totalPrice)
+            //             await addChristmasSpentToken(sender, totalPrice)
                         
-                        const purchaseMsg = `✅ *PEMBELIAN BERHASIL* ✅\n\nKamu membeli:\n${item.name} x${quantity}\n\n💰 Harga: ${numberWithCommas(fixNumberE(totalPrice))}\n\nTerimakasih telah berbelanja di Christmas Shop!\n*© RemComp 2025*`
-                        return reply(from, purchaseMsg, id)
-                    }
-                } catch (err) {
-                    console.error(err)
-                    return reply(from, 'Terjadi kesalahan saat mengakses shop :(', id)
-                }
-                break
+            //             const purchaseMsg = `✅ *PEMBELIAN BERHASIL* ✅\n\nKamu membeli:\n${item.name} x${quantity}\n\n💰 Harga: ${numberWithCommas(fixNumberE(totalPrice))}\n\nTerimakasih telah berbelanja di Christmas Shop!\n*© RemComp 2025*`
+            //             return reply(from, purchaseMsg, id)
+            //         }
+            //     } catch (err) {
+            //         console.error(err)
+            //         return reply(from, 'Terjadi kesalahan saat mengakses shop :(', id)
+            //     }
+            //     break
             case prefix+'christmastoken':
             case prefix+'xmastoken':
             case prefix+'xtoken':
