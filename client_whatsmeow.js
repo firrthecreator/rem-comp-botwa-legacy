@@ -23548,7 +23548,7 @@ Pengirim Saran : wa.me/${allArgs[1].replace('@s.whatsapp.net', '')}
                 reply(from, 'Format Salah, Silahkan ketik '+prefix+'set_user', id)
             }
             break
-        case prefix+'version1':
+        case prefix+'version':
             if (!isSideOwner) return  reply(from, 'Perintah ini hanya untuk role SideOwner!', id)
             console.log('c')
             reply(from, `Current Version : ${_userDb.setUser.version || 'release'}\nPath Version : ${__filename}`)
