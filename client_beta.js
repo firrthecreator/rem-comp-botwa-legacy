@@ -15287,6 +15287,8 @@ Kembali lagi setelah *5 menit* untuk berburu telur lainnya!`, id)
             case prefix+'xmas':
                 // return reply(from, 'Maaf! Fitur ini hanya tersedia untuk Event Natal saja!', id)
                 if (!isOwner) return reply(from, 'Err: 403!')
+                if(getFrag(_userDb) == undefined) await setFrag(_userDb)
+                if(getToken(_userDb) == undefined) await setToken(_userDb)
                 
                 // const getInfoChristmasPng = await import('./lib/database/christmasPng/infoChristmasEvent.png')
                 // const infoPath = path.resolve(getInfoChristmasPng)
@@ -15394,7 +15396,7 @@ Selamat bersenang-senang mencari semua Gift Box yang tersembunyi dan Selamat Nat
                             }
                         }
                         
-                        const userToken = getToken(_userDb)
+                        const userToken = await getToken(_userDb)       
                         console.log('a')
                         if(userToken < totalPrice) {
                             const shortOf = numberWithCommas(fixNumberE(totalPrice - userToken))
@@ -15443,6 +15445,8 @@ Selamat bersenang-senang mencari semua Gift Box yang tersembunyi dan Selamat Nat
             case prefix+'xtoken':
                 // return reply(from, 'Maaf! Fitur ini hanya tersedia untuk Event Natal saja!', id)
                 if (!isOwner) return reply(from, 'Err: 403!')
+                if(getToken(_userDb) == undefined) await setToken(_userDb)
+                
                 if(args.length == 1) {
                     if(getToken(_userDb) === undefined) await setToken(sender)
                     const tokenChristmas = numberWithCommas(getToken(_userDb))
@@ -15527,6 +15531,7 @@ Selamat bersenang-senang mencari semua Gift Box yang tersembunyi dan Selamat Nat
             case prefix+'xfrag':
                 // return reply(from, 'Maaf! Fitur ini hanya tersedia untuk Event Natal saja!', id)
                 if (!isOwner) return reply(from, 'Err: 403!')
+
                 if(args.length == 1) {
                     if(getFrag(_userDb) === undefined) await setFrag(sender)
                     const fragmentChristmas = numberWithCommas(getFrag(_userDb))
@@ -15774,7 +15779,7 @@ Kembali untuk gacha lagi! 🎉
 🎯 *Misi:* Cari GiftBox yang di sembunyikan oleh Pak Santa di berbagai lokasi dan dapatkan hadiah!
 
 📜 *Cara bermain:*\nKetik *${prefix}xgboxhunt [lokasi]* untuk mencari gift box\n
-🗺️ *Lokasi yang tersedia:*\n${locationsText}\n*Note:* _Setiap lokasi mungkin memiliki gift box biasa atau gift box emas yang berharga!_`, id)
+🗺️ *Lokasi yang tersedia:*\n${locationsText}\n*Note:* _Setiap lokasi mungkin memiliki gift box biasa atau gift box langka yang berharga!_`, id)
                     }
                      
                     const location = args[1].toLowerCase()
@@ -15875,6 +15880,7 @@ Kembali lagi setelah *5 menit* untuk berburu Gift Box lainnya!
             case prefix+'exchangechristmasfrag':
             case prefix+'exchangexmasfrag':
             case prefix+'exchangexfrag':
+            case prefix+'exfrag':
                 // return reply(from, 'Maaf! Fitur ini hanya tersedia untuk Event Natal saja!', id)
                 if (!isOwner) return reply(from, 'Err: 403!')
                 
