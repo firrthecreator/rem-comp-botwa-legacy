@@ -2912,12 +2912,11 @@ if(config.isDebug) console.log(`${Date.now() - dateNowProccessIs}ms - Loaded DB 
         //if(isCmd && iscmdabai && limidcmd) return reply(from, 'Anda telah _dibanned_\n*Karena menggunakan command yang tidak terdaftar*\nUntuk unban Join group dan minta unban ke owner\n'+inviteLinkForum, id)
         if(config.isDebug) console.log(`${Date.now() - dateNowProccessIs}ms - Process Command ${prefix+command}`)
         
-        // Initialize Christmas Event Fields
+        // Initialize Christmas Event
         const christmasCommands = ['christmas', 'xmas', 'christmaslb', 'xmaslb', 'xlb', 'christmasshop', 'xmashop', 'xshop', 'christmastoken', 'xmastoken', 'xtoken', 'christmasfrag', 'xmasfrag', 'xfrag', 'christmasgiftbox', 'xmasgiftbox', 'xgbox', 'eventchristmasgiftboxhunt2025santaclaushappychristmas', 'xmasgiftboxhunt', 'xgboxhunt', 'xh', 'exchangechristmasfrag', 'exchangexmasfrag', 'exchangexfrag', 'exfrag']
         
         if(christmasCommands.includes(command)) {
             try {
-                // Initialize complete Christmas Event structure in database
                 await _mongo_UserSchema.updateOne(
                     { iId: sender },
                     {
@@ -2927,8 +2926,7 @@ if(config.isDebug) console.log(`${Date.now() - dateNowProccessIs}ms - Loaded DB 
                     },
                     { upsert: false }
                 )
-                
-                // Also ensure fields exist using $set if undefined
+            
                 const userDbCheck = await _mongo_UserSchema.findOne({ iId: sender })
                 if(!userDbCheck.economy?.evntChristmas) {
                     await _mongo_UserSchema.updateOne(
