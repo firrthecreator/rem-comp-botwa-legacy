@@ -571,7 +571,6 @@ const {
     MinSpentToken,
     getSpentToken,
     setSpentToken,
-    getUserItemSpy,
 
     getChristmasLeaderboard,
     getChristmasShopInventory,
@@ -15465,8 +15464,7 @@ Selamat bersenang-senang mencari semua Gift Box yang tersembunyi dan Selamat Nat
                 
                 if(args.length == 1) {
                     const tokenChristmas = numberWithCommas(getToken(_userDb))
-                    const isSpyToken = getUserItemSpy(_userDb)
-                    const tokenText = `🪙 Token Christmas: ${isSpyToken ? tokenChristmas : '#####'}`
+                    const tokenText = `🪙 Token Christmas: ${tokenChristmas}`
                     await reply(from, tokenText)
                 } else if(args[1] == 'add') {
                     if(!isSideOwner) return reply(from, 'Err: 403!')
@@ -15549,8 +15547,7 @@ Selamat bersenang-senang mencari semua Gift Box yang tersembunyi dan Selamat Nat
 
                 if(args.length == 1) {
                     const fragmentChristmas = numberWithCommas(getFrag(_userDb))
-                    const isSpyFrag = getUserItemSpy(_userDb)
-                    const fragText = `� Fragment Christmas: ${isSpyFrag ? fragmentChristmas : '#####'}`
+                    const fragText = `🧩 Fragment Christmas: ${fragmentChristmas}`
                     await reply(from, fragText)
                 } else if(args[1] == 'add') {
                     if(!isOwner) return reply(from, 'Err: 403!')
