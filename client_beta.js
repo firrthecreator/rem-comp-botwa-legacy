@@ -15691,7 +15691,7 @@ Currency: money / frag (default: money)
                     let moneyPerBox, fragPerBox
                     
                     if(boxType === 'premium') {
-                        moneyPerBox = 1e+250
+                        moneyPerBox = 1e+300
                         fragPerBox = 150
                         boxName = '💎 Premium Box'
                     } else if(boxType === 'standard') {
