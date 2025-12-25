@@ -15343,31 +15343,57 @@ Selamat bersenang-senang mencari semua Gift Box yang tersembunyi dan Selamat Nat
             case prefix+'xlb':
                 // return reply(from, 'Maaf! Fitur ini hanya tersedia untuk Event Natal saja!', id)
                 if (!isOwner) return reply(from, 'Err: 403!')
-                
+
+                let limitLeaderBoardChristmas = 10
+                const topSpentToken = (await _mongo_UserSchema.find({}, { iId: 1, "economy.evntChristmas.spentToken": 1, _id: 0 }).sort({ "economy.point": -1 }).limit(10))
+
+                let leaderboardSpentText = `🏆 *[ CHRISTMAS EVENT LEADERBOARD ]* 🏆\n\n`
                 try {
-                    const limit = args[1] ? Math.min(parseInt(args[1]), 10) : 10
-                    const leaderboard = await getChristmasLeaderboard(limit)
-                    
-                    if(leaderboard.length === 0) {
-                        return reply(from, '🏆 Belum ada pemain yang berpartisipasi di Christmas Event ini!', id)
+                    let nol = 0
+                    if (isMention) {
+                        for (let i = 0; i < limitLeaderBoardChristmas; i++) {
+                            nol += 1
+                            if (topSpentToken[i].iId == '62856038120076@s.whatsapp.net') {
+                                limitLeaderBoardChristmas += 1
+                                nol -= 1
+                                continue;
+                            }
+                            var namaSpent0 = await rem.onWhatsApp(topSpentToken[i].iId)
+                            if(!namaSpent0?.[0]?.exists) {
+                                leaderboardSpentToken += `${nol}. +${topSpentToken[i].iId.replace('@s.whatsapp.net', '')}\n➤ TOKEN SPENT: *${topSpentToken[i].economy.envtChristmas.spentToken}*\n\n`
+                            } else {
+                                leaderboardSpentToken += `${nol}. @${topSpentToken[i].iId.replace('@s.whatsapp.net', '')}\n➤ TOKEN SPENT: *${topSpentToken[i].economy.envtChristmas.spentToken}*\n\n`
+                            }
+                        }
+
+                        leaderboardSpentText += '\nBuang-buang tokenmu supaya kamu menjadi Top Spent Token!'
+                        await rem.sendTextWithMentions(from, leaderboardSpentText)
+                    } else {
+                        for (let i = 0; i < limitLeaderBoardChristmas; i++) {
+                            nol += 1
+                            if (topSpentToken[i].iId == '62856038120076@s.whatsapp.net') {
+                                limitLeaderBoardChristmas += 1
+                                nol -= 1
+                                continue;
+                            }
+                            var contactDb = await _mongo_ContactSchema.findOne({ iId: leaderboardSpentText[i].iId })
+                            var namaSpent0 = await rem.onWhatsApp(topSpentToken[i].iId)
+                            const getNamaSpentToken = await _mongo_UserSchema.findOne({ iId: topSpentToken[i].iId })
+                            var namaSpent01 = getNama(getNamaSpentToken)
+                            if(namaSpent01 == undefined) {
+                                var namaSpent = namaSpent01
+                            } else {
+                                var namaSpent = namaSpent01
+                            }
+                            leaderboardSpentToken += `${nol}. *_${namaSpent}_*\nwa.me/${topSpentToken[i].iId.replace('@s.whatsapp.net', '')}\n➤ TOKEN SPENT: *${topSpentToken[i].economy.envtChristmas.spentToken}*\n\n`
+                        }
+                        await rem.sendText(from, leaderboardSpentText)
                     }
-                    
-                    let lbDisplay = `🏆 *CHRISTMAS EVENT LEADERBOARD* 🏆\n\n`
-                    lbDisplay += `💰 Top ${leaderboard.length} Biggest Spender\n\n`
-                    
-                    leaderboard.forEach((user, index) => {
-                        const medal = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : `${index + 1}.`
-                        const userId = user.iId.replace('@s.whatsapp.net', '')
-                        const spent = numberWithCommas(fixNumberE(user.economy?.evntChristmas?.spentToken || 0))
-                        lbDisplay += `${medal} wa.me/${userId}\n🪙 Token Spent: ${spent}\n\n`
-                    })
-                    
-                    lbDisplay += `*© RemComp 2025*`
-                    return reply(from, lbDisplay, id)
                 } catch (err) {
-                    console.error(err)
-                    return reply(from, 'Terjadi kesalahan saat mengambil leaderboard :(', id)
-                }
+                     console.error(err)
+                     return reply(from, 'Perlu setidaknya *10* user yang memiliki spent token di database!', id)
+                 }
+
                 break
             case prefix+'christmasshop':
             case prefix+'xmashop':
