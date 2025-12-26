@@ -15419,7 +15419,7 @@ Selamat bersenang-senang mencari semua Gift Box yang tersembunyi dan Selamat Nat
                         return reply(from, shopDisplay, id)
                     } else if(args.length >= 2) {
                         const itemIndex = parseInt(args[1]) - 1
-                        const quantity = args[2] ? parseInt(args[2]) : 1
+                        const quantity = args[2] ? parseInt(args[2]) : 1 // validate quantity must be numeric
                         
                         const itemKeys = Object.keys(shop.items)
                         console.log('a')
@@ -15436,6 +15436,10 @@ Selamat bersenang-senang mencari semua Gift Box yang tersembunyi dan Selamat Nat
                         if(userToken < totalPrice) {
                             const shortOf = numberWithCommas(fixNumberE(totalPrice - userToken))
                             return reply(from, `❌ Token kamu tidak cukup!\nButuh: ${numberWithCommas(fixNumberE(totalPrice))}\nKekurangan: ${shortOf}`, id)
+                        }
+
+                        if(item === undefined) {
+                            return reply(from, 'Format Salah')
                         }
                         
                         const purchaseResult = await buyChristmasShopItem(itemId, quantity)
@@ -15678,7 +15682,7 @@ Currency: money / frag (default: money)
                     }
                     
                     const boxType = args[1]?.toLowerCase()
-                    const quantity = args[2] ? parseInt(args[2]) : 1
+                    const quantity = args[2] ? parseInt(args[2]) : 1 // validate quantity must be numeric
                     const currency = args[3]?.toLowerCase() || 'money'
                     
                     let totalPrice, boxName, currencyName
