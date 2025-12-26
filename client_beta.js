@@ -15711,6 +15711,7 @@ Currency: money / frag (default: money)
                     const userFrag = getFrag(_userDb)
                     
                     if(currency === 'money') {
+                        console.log('a')
                         totalPrice = moneyPerBox * quantity
                         currencyName = 'Money'
                         
@@ -15721,6 +15722,7 @@ Currency: money / frag (default: money)
                         
                         await MinMoney(sender, totalPrice)
                     } else if(currency === 'frag') {
+                        console.log('a')
                         totalPrice = fragPerBox * quantity
                         currencyName = 'Fragment'
                         console.log('a')
