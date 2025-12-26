@@ -15361,9 +15361,9 @@ Selamat bersenang-senang mencari semua Gift Box yang tersembunyi dan Selamat Nat
                             }
                             var namaSpent0 = await rem.onWhatsApp(topSpentToken[i].iId)
                             if(!namaSpent0?.[0]?.exists) {
-                                leaderboardSpentToken += `${nol}. +${topSpentToken[i].iId.replace('@s.whatsapp.net', '')}\n➤ TOKEN SPENT: *${topSpentToken[i].economy.envtChristmas.spentToken}*\n\n`
+                                leaderboardSpentText += `${nol}. +${topSpentToken[i].iId.replace('@s.whatsapp.net', '')}\n➤ TOKEN SPENT: *${topSpentToken[i].economy.envtChristmas.spentToken}*\n\n`
                             } else {
-                                leaderboardSpentToken += `${nol}. @${topSpentToken[i].iId.replace('@s.whatsapp.net', '')}\n➤ TOKEN SPENT: *${topSpentToken[i].economy.envtChristmas.spentToken}*\n\n`
+                                leaderboardSpentText += `${nol}. @${topSpentToken[i].iId.replace('@s.whatsapp.net', '')}\n➤ TOKEN SPENT: *${topSpentToken[i].economy.envtChristmas.spentToken}*\n\n`
                             }
                         }
 
@@ -15386,7 +15386,7 @@ Selamat bersenang-senang mencari semua Gift Box yang tersembunyi dan Selamat Nat
                             } else {
                                 var namaSpent = namaSpent01
                             }
-                            leaderboardSpentToken += `${nol}. *_${namaSpent}_*\nwa.me/${topSpentToken[i].iId.replace('@s.whatsapp.net', '')}\n➤ TOKEN SPENT: *${topSpentToken[i].economy.envtChristmas.spentToken}*\n\n`
+                            leaderboardSpentText += `${nol}. *_${namaSpent}_*\nwa.me/${topSpentToken[i].iId.replace('@s.whatsapp.net', '')}\n➤ TOKEN SPENT: *${topSpentToken[i].economy.envtChristmas.spentToken}*\n\n`
                         }
                         await rem.sendText(from, leaderboardSpentText)
                     }
