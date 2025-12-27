@@ -15831,7 +15831,7 @@ Currency: money / frag (default: money)
                         let dispMoney = money
                         try { dispMoney = numberWithCommas(fixNumberE(money)) } catch(e) {}
 
-                        const textGiftBoxHunt = `🎁 *${giftBoxType}* 🎁\n\nSelamat! Kamu menemukan Gift Box di *${location}*!\n\n💰 *Hadiah:*\n💵 Money: +${dispMoney}\n🪙 Token: +${token}\n🧩 Fragment: +${frag}\n📈 XP: +${xp}\n📊 Limit: +${limit}\n\nKembali lagi setelah *5 menit*!\n*© RemComp 2025*`
+                        const textGiftBoxHunt = `🎁 *${giftBoxType}* 🎁\n\nSelamat! Kamu menemukan Gift Box di *${location}*!\n\n💰 *Hadiah:*\n💵 Money: +${dispMoney}\n🪙 Token: +${token}\n🧩 Fragment: +${frag}\n📈 XP: +${xp}\n📊 Limit: +${limit}\n\nKembali lagi setelah *2 menit*!\n*© RemComp 2025*`
                         
                         return reply(from, textGiftBoxHunt, id)
                     } else {
