@@ -15657,14 +15657,14 @@ Selamat bersenang-senang mencari semua Gift Box yang tersembunyi dan Selamat Nat
                     if(args.length === 1) {
                         const gacha1Msg = `🎁 *CHRISTMAS GIFT BOX GACHA* 🎁\n
 💎 *Premium Box* (Hadiah Terbaik)
-💰 Harga: 1e+200 Money ATAU 100 Fragment per Box
+💰 Harga: 1e+200 Money ATAU 500 Fragment per Box
 • Ultra Rare (1%): Token, Fragment, Money, XP, Limit
 • Very Rare (7%): Token, Fragment, Money, XP, Limit
 • Rare (17%): Token, Fragment, Money, XP, Limit
 • Common (75%): Token, Fragment, Money, XP, Limit
 
 ⭐ *Standard Box* (Hadiah Normal)
-💰 Harga: 1e+150 Money ATAU 80 Fragment per Box
+💰 Harga: 1e+150 Money ATAU 100 Fragment per Box
 • Very Rare (3%): Token, Fragment, Money, XP, Limit
 • Rare (12%): Token, Fragment, Money, XP, Limit
 • Uncommon (35%): Token, Fragment, Money, XP, Limit
@@ -15708,11 +15708,11 @@ Currency: money / frag (default: money)
                     
                     if(boxType === 'premium') {
                         moneyPerBox = 1e+200
-                        fragPerBox = 100
+                        fragPerBox = 500
                         boxName = '💎 Premium Box'
                     } else if(boxType === 'standard') {
                         moneyPerBox = 1e+150
-                        fragPerBox = 80
+                        fragPerBox = 100
                         boxName = '⭐ Standard Box'
                     } else if(boxType === 'lucky') {
                         moneyPerBox = 1e+100
