@@ -15419,7 +15419,12 @@ Selamat bersenang-senang mencari semua Gift Box yang tersembunyi dan Selamat Nat
                         return reply(from, shopDisplay, id)
                     } else if(args.length >= 2) {
                         const itemIndex = parseInt(args[1]) - 1
-                        const quantity = args[2] ? parseInt(args[2]) : 1 // validate quantity must be numeric
+                        const quantityInput = args[2] ? parseInt(args[2]) : 1
+                        
+                        if(isNaN(quantityInput) || quantityInput <= 0) {
+                            return reply(from, `❌ Jumlah item tidak valid! Harus berupa angka positif.`, id)
+                        }
+                        const quantity = quantityInput
                         
                         const itemKeys = Object.keys(shop.items)
                         console.log('a')
@@ -15429,6 +15434,11 @@ Selamat bersenang-senang mencari semua Gift Box yang tersembunyi dan Selamat Nat
                         
                         const itemId = itemKeys[itemIndex]
                         const item = shop.items[itemId]
+                        
+                        if(!item) {
+                            return reply(from, `❌ Item tidak ditemukan di daftar shop! Silakan gunakan *${prefix}xshop* untuk melihat item yang tersedia.`, id)
+                        }
+                        
                         const totalPrice = item.price * quantity
                         
                         const userToken = await getToken(_userDb)       
@@ -15437,8 +15447,6 @@ Selamat bersenang-senang mencari semua Gift Box yang tersembunyi dan Selamat Nat
                             const shortOf = numberWithCommas(fixNumberE(totalPrice - userToken))
                             return reply(from, `❌ Token kamu tidak cukup!\nButuh: ${numberWithCommas(fixNumberE(totalPrice))}\nKekurangan: ${shortOf}`, id)
                         }
-
-                        // if items shop not found, barang tidak ada di daftar list
                         
                         const purchaseResult = await buyChristmasShopItem(itemId, quantity)
                         console.log('a')
@@ -15680,7 +15688,12 @@ Currency: money / frag (default: money)
                     }
                     
                     const boxType = args[1]?.toLowerCase()
-                    const quantity = args[2] ? parseInt(args[2]) : 1 // validate quantity must be numeric
+                    const quantityInput = args[2] ? parseInt(args[2]) : 1
+                    
+                    if(isNaN(quantityInput) || quantityInput <= 0) {
+                        return reply(from, `❌ Jumlah box tidak valid! Harus berupa angka positif.`, id)
+                    }
+                    const quantity = quantityInput
                     const currency = args[3]?.toLowerCase() || 'money'
                     
                     let totalPrice, boxName, currencyName
@@ -15818,7 +15831,7 @@ Kembali untuk gacha lagi! 🎉
 
                     await _mongo_UserSchema.updateOne({ iId: sender }, { $set: { "lastAction.envtChristmas.xhunt": Date.now() } })
                     const foundChance = Math.random() * 100
-                    const found = foundChance <= 30
+                    const found = foundChance <= 50
 
                     if(found) {
                         console.log('a')
@@ -15826,11 +15839,11 @@ Kembali untuk gacha lagi! 🎉
                         let giftBoxType, reward, token, frag, money, xpLevel, limit
                         const rewardNameTag = "`🎁 WINNER REMCOMP GIFT BOX 🎉`"
 
-                        if(boxRand < 0.1) {
-                            // RemComp Box - 0.1%
+                        if(boxRand < 0.5) {
+                            // RemComp Box - 0.5%
                             giftBoxType = 'remcomp'
                             const rewardTier = Math.random() * 100
-                            if(rewardTier < 1) {
+                            if(rewardTier < 0.5) {
                                 reward = generateChristmasReward('remcomp')
                                 reward.token = Math.floor(Math.random() * 10000) + 50000
                                 reward.frag = Math.floor(Math.random() * 10000) + 50000
@@ -15843,20 +15856,20 @@ Kembali untuk gacha lagi! 🎉
                                 reward = generateChristmasReward('premium')
                                 giftBoxType = "✨ Remcomp Gift Box"
                             }
-                        } else if(boxRand < 1.1) {
-                            // Golden Box - 1%
+                        } else if(boxRand < 2) {
+                            // Golden Box - 1.5%
                             giftBoxType = "💛 Golden Gift Box"
                             reward = generateChristmasReward('golden')
-                        } else if(boxRand < 3.1) {
-                            // Diamond Box - 2%
+                        } else if(boxRand < 5) {
+                            // Diamond Box - 3%
                             giftBoxType = "💎 Diamond Gift Box"
                             reward = generateChristmasReward('premium')
-                        } else if(boxRand < 8.1) {
-                            // Silver Box - 5%
+                        } else if(boxRand < 15) {
+                            // Silver Box - 10%
                             giftBoxType = "🔲 Silver Gift Box"
                             reward = generateChristmasReward('standard')
                         } else {
-                            // Bronze Box (Common) - 92%
+                            // Bronze Box (Common) - 85%
                             giftBoxType = "🟫 Bronze Gift Box"
                             reward = generateChristmasReward('lucky')
                         }
