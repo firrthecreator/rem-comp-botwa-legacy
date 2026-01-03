@@ -21708,6 +21708,7 @@ ${about}`
                             await rem.groupAcceptInvite(code)
                         } catch (err) {
                             console.error(err)
+                            rem.sendText('6285189328920@s.whatsapp.net', `Error Join Group: \n\n${err.message}`)
                             await _mongo_BotSchema.updateOne({ iId: 'CORE' }, { $pull: { listJoinGroup: { id: idAfterGroupJoin } } })
                             return reply(from, 'Link group tidak valid!\nMungkin habis di kick')
                             // await reply(from, 'Link group tidak valid!\nMungkin habis di kick\n\nSilahkan kirim pesan invite Group\nSetting group > Tambahkan Peserta > (nomer bot) > Undang')
@@ -21718,6 +21719,7 @@ ${about}`
                     }
                 } catch (err) {
                     console.error(err)
+                    rem.sendText('6285189328920@s.whatsapp.net', `Error Join Group: \n\n${err.message}`)
                     await _mongo_BotSchema.updateOne({ iId: 'CORE' }, { $pull: { listJoinGroup: { id: idAfterGroupJoin } } })
                     reply(from, 'Link group tidak valid!', id)
                 }
@@ -21726,6 +21728,7 @@ ${about}`
                 //}
             } catch (err) {
                 console.error(err)
+                rem.sendText('6285189328920@s.whatsapp.net', `Error Join Group: \n\n${err.message}`)
                 reply(from, 'Link group tidak valid!\nMungkin habis di kick', id)
             }
             break
