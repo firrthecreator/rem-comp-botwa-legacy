@@ -563,6 +563,8 @@ const {
     generateChristmasReward,
     addChristmasSpentToken,
 
+    getSpentTokenChristmas,
+
     //WARN
     addWarn,
     getWarn,
@@ -15324,6 +15326,10 @@ Selamat bersenang-senang mencari semua Gift Box yang tersembunyi dan Selamat Nat
                 // await rem.sendFile(from, bufferInfoChristmasPng, 'infoChristmasEvent.png', christmasEventInfo, messageRaw, image)
                 return reply(from, christmasEventInfo, id)
                 break
+            case prefix+'sp':
+                const spentTokenChristmas = numberWithCommas(getSpentToken(_userDb))
+                const spentTokenText = `🪙 Token Christmas: ${spentTokenChristmas}`
+                await reply(from, spentTokenText)
             case prefix+'xmaslb':
             case prefix+'xlb':
                 try {
