@@ -19521,7 +19521,7 @@ ${about}`
     //     //     rem.sendFileAuto(from, pageDownloadIg.media[i], '', '', messageRaw)
     //     // }
     //     break
-    case prefix+'igstalk':
+    /** case prefix+'igstalk':
             //if (!isGroupMsg) return reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             //if (isLimit(_userDb)) return reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             
@@ -19567,7 +19567,7 @@ ${about}`
                  await reply(from, 'Maaf, User tidak ditemukan', id)
                 //  rem.sendText(numberReportError, 'Igstalk Error : ' + err)
                }
-              break
+              break **/
 //         case prefix+'tiktokstalk':
 //             //if (!isGroupMsg) return reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
 //             //if (isLimit(_userDb)) return reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
