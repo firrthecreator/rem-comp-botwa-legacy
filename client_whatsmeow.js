@@ -15288,7 +15288,7 @@ Kembali lagi setelah *5 menit* untuk berburu telur lainnya!`, id)
             break **/
 
                     // EVENT CHRISTMAS
-            case prefix+'christmas':
+            /** case prefix+'christmas':
             case prefix+'xmas':
                 // return reply(from, 'Maaf! Fitur ini hanya tersedia untuk Event Natal saja!', id)
                 // if (!isOwner) return reply(from, 'Err: 403!')
@@ -15900,7 +15900,7 @@ Atau *${prefix}exchangexfrag all* (tukar semua token)
                     console.error(err)
                     return reply(from, 'Terjadi kesalahan saat exchange :(', id)
                 }
-                break
+                break **/
 
         //
         // case prefix+'addsaudara':
@@ -19521,7 +19521,7 @@ ${about}`
     //     //     rem.sendFileAuto(from, pageDownloadIg.media[i], '', '', messageRaw)
     //     // }
     //     break
-    case prefix+'igstalk':
+    /** case prefix+'igstalk':
             //if (!isGroupMsg) return reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             //if (isLimit(_userDb)) return reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             
@@ -19567,7 +19567,7 @@ ${about}`
                  await reply(from, 'Maaf, User tidak ditemukan', id)
                 //  rem.sendText(numberReportError, 'Igstalk Error : ' + err)
                }
-              break
+              break **/
 //         case prefix+'tiktokstalk':
 //             //if (!isGroupMsg) return reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
 //             //if (isLimit(_userDb)) return reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
