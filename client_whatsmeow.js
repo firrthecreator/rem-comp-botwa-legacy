@@ -19321,7 +19321,7 @@ ${about}`
             //if (!isGroupMsg) return reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             //if (isLimit(_userDb)) return reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
             if (args.length === 1) return reply(from, `Kirim perintah *${prefix}wiki [ Query ]*\nContoh : *${prefix}wiki lagu*`, id)
-            const queryz_ = body.replace(`${args[0] }`, '')
+            const queryz_ = body.replace(`${args[0]}`, '')
             console.log(queryz_)
             const wiki = await axios.get(`https://id.wikipedia.org/w/api.php?action=opensearch&search=${queryz_}&limit=max`)
             reply(from, `*「 WIKI 」*\n\n${wiki.data[3].join('\n')}`)
