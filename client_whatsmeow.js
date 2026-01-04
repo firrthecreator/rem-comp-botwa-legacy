@@ -19324,17 +19324,21 @@ ${about}`
         case prefix+'wikipedia':
             //if (!isGroupMsg) return reply(from, 'Perintah ini hanya bisa di gunakan dalam group!', id)
             //if (isLimit(_userDb)) return reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
-            if (args.length === 1) return reply(from, `Kirim perintah *${prefix}wiki [ Query ]*\nContoh : *${prefix}wiki lagu*`, id)
-            const queryz_ = body.replace(`${args[0]}`, '')
-            console.log(queryz_)
-            const wiki = await axios.get(`https://id.wikipedia.org/w/api.php?action=opensearch&search=${queryz_}&limit=max`)
-            reply(from, `*「 WIKI 」*\n\n${wiki.data[3].join('\n')}`)
-            // if (wiki.data.result.error) {
-            //     reply(from, wiki.data.result.error, id)
-            // } else {
-            //     reply(from, `*「 WIKI 」*\n\n➤ *Query* : ${queryz_}\n\n➤ *Result* : ${wiki.data.result.result}`, id)
-            //     await limitAdd(serial)
-            // }
+            try {
+                if (args.length === 1) return reply(from, `Kirim perintah *${prefix}wiki [ Query ]*\nContoh : *${prefix}wiki lagu*`, id)
+                const queryz_ = body.replace(`${args[0]}`, '')
+                console.log(queryz_)
+                const wiki = await axios.get(`https://id.wikipedia.org/w/api.php?action=opensearch&search=${queryz_}&limit=max`)
+                reply(from, `*「 WIKI 」*\n\n${wiki.data[3].join('\n')}`)
+                // if (wiki.data.result.error) {
+                //     reply(from, wiki.data.result.error, id)
+                // } else {
+                //     reply(from, `*「 WIKI 」*\n\n➤ *Query* : ${queryz_}\n\n➤ *Result* : ${wiki.data.result.result}`, id)
+                //     await limitAdd(serial)
+                // }
+            } catch (e) {
+                reply(from, `Terjadi error saat mencari wiki: ${e.message}`, id)
+            }
             break
         case prefix+'kbbi':
             if (!isOwner) return reply(from, 'Command ini sedang dalam perbaikan!', id)
