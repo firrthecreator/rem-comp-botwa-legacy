@@ -2329,12 +2329,20 @@ if(config.isDebug) console.log(`${Date.now() - dateNowProccessIs}ms - Loaded DB 
             console.log(args0Filter_mathgame)
             if(args0Filter_mathgame == jawabanMathGame_Answer.jawaban) {
                 if(config.isDebug) console.log(`${Date.now() - dateNowProccessIs}ms - check is MathGame [7]`)
-                if(jawabanMathGame_Answer.diff == 'Easy') {
+                if(jawabanMathGame_Answer.diff == 'VeryEasy') {
+                    var XPNambahMathGame = Math.floor(Math.random() * 10) + 500
+                } else if(jawabanMathGame_Answer.diff == 'Easy') {
                     var XPNambahMathGame = Math.floor(Math.random() * 10) + 1000
                 } else if(jawabanMathGame_Answer.diff == 'Normal') {
                     var XPNambahMathGame = Math.floor(Math.random() * 10) + 3000
                 } else if(jawabanMathGame_Answer.diff == 'Hard') {
                     var XPNambahMathGame = Math.floor(Math.random() * 10) + 5000
+                } else if(jawabanMathGame_Answer.diff == 'Expert') {
+                    var XPNambahMathGame = Math.floor(Math.random() * 10) + 7000
+                } else if(jawabanMathGame_Answer.diff == 'Nightmare') {
+                    var XPNambahMathGame = Math.floor(Math.random() * 10) + 10000
+                } else {
+                    var XPNambahMathGame = Math.floor(Math.random() * 10) + 1000
                 }
 
                 if(config.isDebug) console.log(`${Date.now() - dateNowProccessIs}ms - check is MathGame [8]`)
