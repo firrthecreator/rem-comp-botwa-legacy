@@ -10,7 +10,7 @@ exports.sideOwnerNumber = '6281358181668@s.whatsapp.net, 62856038120076@s.whatsa
 /* Is Public can access the bot? | true / false / 'bot' */
 exports.isPublic = true
 
-exports.botWM = '© RemComp || 2021 - 2025'
+exports.botWM = '© RemComp || 2021 - 2026'
 
 /**
  * Debug Mode

@@ -22906,35 +22906,6 @@ Tanggal/Pukul : ${formattedTime}
             await _mongo_UserSchema.updateOne({ iId: superUnBanBanned }, { $set: { isSuperBanned: false } })
             reply(from, 'Success')
             break
-        case prefix+'hyperban':
-            if(!isOwner) return reply(from, 'Invalid!')
-            
-            let hyperBanBanned = undefined
-            if(mentionedJidList[0]) {
-                hyperBanBanned = mentionedJidList[0]
-            } else if(quotedMsg) {
-                hyperBanBanned = quotedMsg.sender
-            } else if(args[1] != undefined) {
-                args[1].includes('@s.whatsapp.net') ? hyperBanBanned = args[1] : !isNaN(args[1]) ? hyperBanBanned = args[1] + '@s.whatsapp.net' : hyperBanBanned = undefined
-                if(hyperBanBanned == undefined) return reply(from, 'Invalid!')
-            } else {
-                return reply(from, 'Invalid!')
-            }
-
-            await _mongo_UserSchema.updateOne({ iId: mentionedJidList[0] }, { $set: { isSuperBanned: true } })
-            await _mongo_UserSchema.updateOne({ iId: mentionedJidList[0] }, { $set: { "economy.money": 0 } })
-            await _mongo_UserSchema.updateOne({ iId: mentionedJidList[0] }, { $set: { "economy.level": 0 } })
-            await _mongo_UserSchema.updateOne({ iId: mentionedJidList[0] }, { $set: { "economy.xp": 0 } })
-            await _mongo_UserSchema.updateOne({ iId: mentionedJidList[0] }, { $set: { isBanned: true } })
-            await _mongo_UserSchema.updateOne({ iId: mentionedJidList[0] }, { $set: { bannedTime: 8641733843042824 } })
-            await _mongo_UserSchema.updateOne({ iId: mentionedJidList[0] }, { $set: { bannedReason: "kasihan kereset yh" } })
-            await _mongo_UserSchema.updateOne({ iId: mentionedJidList[0] }, { $set: { isPremium: false } })
-            await _mongo_UserSchema.updateOne({ iId: mentionedJidList[0] }, { $set: { "rl.pd": {} } })
-            await _mongo_UserSchema.updateOne({ iId: mentionedJidList[0] }, { $set: { "nametag": { "select": "🌴 Member 🌴", "list": ["🌴 Member 🌴"] } } })
-            await _mongo_UserSchema.updateOne({ iId: mentionedJidList[0] }, { $set: { "rl": { "name": "", "gender": "", "antispamAct": 0, "food": 0, "stamina": 0, "mantan": [], "isImportedPd": true } } })
-
-            reply(from, 'Success')
-            break
         case prefix+'deldb':
         case prefix+'rmdb':
             if(!isOwner) return reply(from, 'Invalid!')
