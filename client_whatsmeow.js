@@ -19334,7 +19334,7 @@ ${about}`
                 if (args.length === 1) return reply(from, `Kirim perintah *${prefix}wiki [ Query ]*\nContoh : *${prefix}wiki lagu*`, id)
                 const queryz_ = body.replace(`${args[0]}`, '')
                 console.log(queryz_)
-                const wiki = await axios.get(`https://id.wikipedia.org/w/api.php?action=opensearch&search=${queryz_}&limit=max`)
+                const wiki = await axios.get(`https://id.wikipedia.org/w/api.php?action=opensearch&search=${queryz_}&limit=max`, { headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36' } })
                 reply(from, `*「 WIKI 」*\n\n${wiki.data[3].join('\n')}`)
                 // if (wiki.data.result.error) {
                 //     reply(from, wiki.data.result.error, id)
