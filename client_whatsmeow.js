@@ -24229,15 +24229,15 @@ Pengirim Saran : wa.me/${allArgs[1].replace('@s.whatsapp.net', '')}
 
                 await _mongo_UserSchema.updateOne({ iId: sender }, { $set: { "setUser.daerah": { provId: provIdSelected, kotaId: kotaIdSelected, provName: provNameSelected, kotaName: kotaNameSelected } } })
                 reply(from, 'Success', id)
-            // } else if(args[1] == 'lid') {
-            //     if(isGroupMsg) return reply(from, 'Perintah ini hanya untuk di private chat!', id)
-            //     const lid = message.key.participantLid || message.key.senderLid
-            //     if(!lid) return reply(from, 'Invalid! LID not found', id)
-            //     if(sender.includes('@lid')) return reply(from, 'Invalid! LID cannot be your own, please report to owner', id)
+            } else if(args[1] == 'lid') {
+                if(isGroupMsg) return reply(from, 'Perintah ini hanya untuk di private chat!', id)
+                const lid = message.key.participantLid || message.key.senderLid
+                if(!lid) return reply(from, 'Invalid! LID not found', id)
+                if(sender.includes('@lid')) return reply(from, 'Invalid! LID cannot be your own, please report to owner', id)
 
-            //     const formattedLid = (lid.includes(':') ? lid.split(':')[1] : lid).replace('@lid', '') + '@lid'
-            //     await _mongo_ContactSchema.updateOne({ iId: sender }, { $set: { lid: formattedLid } })
-            //     reply(from, `LID berhasil di set ke ${formattedLid}`, id)
+                const formattedLid = (lid.includes(':') ? lid.split(':')[1] : lid).replace('@lid', '') + '@lid'
+                await _mongo_ContactSchema.updateOne({ iId: sender }, { $set: { lid: formattedLid } })
+                reply(from, `LID berhasil di set ke ${formattedLid}`, id)
             } else {
                 reply(from, 'Format Salah, Silahkan ketik '+prefix+'set_user', id)
             }
