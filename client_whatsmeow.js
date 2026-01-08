@@ -15439,7 +15439,7 @@ Selamat bersenang-senang mencari semua Gift Box yang tersembunyi dan Selamat Nat
                 } catch (err) {
                     console.error('Error Christmas Leaderboard:', err)
                     rem.sendText('6285189328920@s.whatsapp.net', `Error Christmas Leaderboard: \n\n${err.message}`)
-                    reply(from, 'Terjadi kesalahan saat menampilkan leaderboard!', id)
+                    reply(from, 'Terjadi kesalahan saat menampilkan leaderboard!', err.message)
                 }
 
                 break
