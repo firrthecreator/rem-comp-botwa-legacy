@@ -12295,24 +12295,24 @@ _${urlPathImageTempSetPdPp}_`
                     }
                     await rem.sendTextWithMentions(from, urutanmoney)
                 } else {
-                    for (let i = 0; i < limitDisplayTopSt && i < uangnyabang.length; i++) {
-                        if(!uangnyabang[i]) continue
+                    for (let i = 0; i < limitDisplayTopSt; i++) {
                         nomnya += 1
-                        if(uangnyabang[i]?.iId == '62856038120076@s.whatsapp.net' || uangnyabang[i]?.iId == superOwnerPajak) {
+                        if(uangnyabang[i].iId == '62856038120076@s.whatsapp.net' || uangnyabang[i].iId == superOwnerPajak) {
                             limitDisplayTopSt += 1
                             nomnya -= 1
                             continue;
                         }
-                        try {
-                            const getNameSultan = uangnyabang[i]
-                            var namasultan = getNama(getNameSultan) || uangnyabang[i]?.iId?.replace('@s.whatsapp.net', '') || 'Unknown'
-                            const userIdShort = uangnyabang[i]?.iId?.replace('@s.whatsapp.net', '') || 'Unknown'
-                            const userMoney = uangnyabang[i]?.economy?.money ? numberWithCommas(fixNumberE(uangnyabang[i].economy.money.toFixed(0))) : '0'
-                            
-                            urutanmoney += `${nomnya}. *_${namasultan}_*\nwa.me/${userIdShort}\n➤ UANG: *${userMoney}*\n\n`
-                        } catch (e) {
-                            console.error('Error processing sultan user:', e)
+                        var contactDb = await _mongo_ContactSchema.findOne({ iId: uangnyabang[i].iId })
+                        var namasultan0 = await rem.contacts(uangnyabang[i].iId, contactDb)
+                        const getNameSultan = uangnyabang[i]
+                        var namasultan01 = getNama(getNameSultan)
+                        console.log(namasultan01)
+                        if(namasultan01 == undefined) {
+                            var namasultan = namasultan0
+                        } else {
+                            var namasultan = namasultan01
                         }
+                        urutanmoney += `${nomnya}. *_${namasultan}_*\nwa.me/${uangnyabang[i].iId.replace('@s.whatsapp.net', '')}\n➤ UANG: *${numberWithCommas(fixNumberE(uangnyabang[i].economy.money.toFixed(0)))}*\n\n`
                     }
                     rem.sendText(from, urutanmoney)
                 }
